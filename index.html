@@ -44,8 +44,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion')
+</script>
 <style>
   :root {
+    --ease: cubic-bezier(.16, 1, .3, 1);
+    --live: #2e9e5b;
     --bg: #f7f8fa;
     --ink: #16181d;
     --muted: #6a7080;
@@ -94,39 +99,98 @@
     max-width: 16ch;
   }
   .hero .intro { margin: 1.75rem 0 0; max-width: 32rem; color: var(--muted); font-size: 1.0625rem; }
-  .hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-    animation: rise .9s cubic-bezier(.2, .7, .2, 1) both;
+  .name-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.25rem; margin: 0 0 1.5rem; }
+  .name-row .name { margin: 0; }
+  .status { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; color: var(--muted); }
+  .status::before {
+    content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: var(--live);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--live) 55%, transparent);
   }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(12px); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero img { animation: none; }
+  html.motion .status::before { animation: pulse 2.4s var(--ease) infinite; }
+  @keyframes pulse {
+    70%, 100% { box-shadow: 0 0 0 .55rem color-mix(in srgb, var(--live) 0%, transparent); }
   }
 
+  .portrait {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    will-change: transform;
+  }
+  .portrait img { width: 100%; height: auto; display: block; }
+  .portrait::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgb(255 255 255 / .35), transparent 50%);
+    mix-blend-mode: soft-light;
+    opacity: 0;
+    transition: opacity .6s var(--ease);
+    pointer-events: none;
+  }
+  .portrait:hover::after { opacity: 1; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+  .split .w > span { display: inline-block; }
+
+  html.motion .split .w > span {
+    transform: translateY(110%);
+    transition: transform 1.1s var(--ease);
+    transition-delay: calc(var(--d, 0ms) + var(--i) * 45ms);
+  }
+  html.motion .split.in .w > span { transform: none; }
+
+  html.motion .fade { opacity: 0; transform: translateY(10px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: var(--d, 0ms); }
+  html.motion .fade.in { opacity: 1; transform: none; }
+
+  html.motion .portrait { clip-path: inset(100% 0 0 0 round 8px); transition: clip-path 1.4s var(--ease) .25s; }
+  html.motion .portrait img { transform: scale(1.18); transition: transform 1.9s var(--ease) .25s; }
+  html.motion .portrait.in { clip-path: inset(0 0 0 0 round 8px); }
+  html.motion .portrait.in img { transform: none; }
+
   .links { display: flex; flex-wrap: wrap; gap: 1.75rem; margin-top: 2.25rem; }
-  .links a { font-weight: 500; border-bottom: 1px solid var(--rule); padding-bottom: 2px; transition: border-color .2s, color .2s; }
-  .links a:hover { color: var(--accent); border-color: var(--accent); }
+  .links a {
+    font-weight: 500;
+    padding-bottom: 3px;
+    background:
+      linear-gradient(var(--accent), var(--accent)) 0 100% / 0 1px no-repeat,
+      linear-gradient(var(--rule), var(--rule)) 0 100% / 100% 1px no-repeat;
+    transition: background-size .5s var(--ease), color .3s;
+  }
+  .links a:hover { color: var(--accent); background-size: 100% 1px, 100% 1px; }
 
   section {
     display: grid;
     grid-template-columns: 11rem 1fr;
     gap: 2rem;
     padding: 3.5rem 0;
-    border-top: 1px solid var(--rule);
+    position: relative;
   }
+  section::before, .list li + li::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: var(--rule); transform-origin: left;
+  }
+  html.motion section::before { transform: scaleX(0); transition: transform 1.4s var(--ease); }
+  html.motion section.in::before { transform: none; }
+  html.motion .list li + li::before { transform: scaleX(0); transition: transform 1.1s var(--ease); transition-delay: calc(200ms + var(--i) * 90ms); }
+  html.motion section.in .list li + li::before { transform: none; }
+  html.motion section h2, html.motion .list li > *, html.motion .offer li {
+    opacity: 0; transition: opacity .9s var(--ease); transition-delay: calc(150ms + var(--i, 0) * 90ms);
+  }
+  html.motion section.in h2, html.motion section.in .list li > *, html.motion section.in .offer li { opacity: 1; }
+  html.motion .offer li::before { transform: scaleX(0); transform-origin: left; transition: transform .8s var(--ease); transition-delay: calc(250ms + var(--i) * 90ms); }
+  html.motion section.in .offer li::before { transform: none; }
   h2 { margin: 0; font-size: .9375rem; font-weight: 500; color: var(--muted); }
 
   ol, ul { list-style: none; margin: 0; padding: 0; }
   .list li { display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; padding: .9rem 0; }
-  .list li + li { border-top: 1px solid var(--rule); }
+  .list li { position: relative; }
   .list li:first-child { padding-top: 0; }
   .list b { font-weight: 500; }
   .list p { grid-column: 1 / -1; margin: 0; color: var(--muted); max-width: 34rem; }
   .list time, .list .meta { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .list .meta { font-variant-numeric: tabular-nums; }
   .list a b { transition: color .2s; }
   .list a:hover b { color: var(--accent); }
 
@@ -140,7 +204,7 @@
 
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; gap: 2.5rem; min-height: 0; padding: 2.5rem 0 3.5rem; }
-    .hero img { max-width: 15rem; order: -1; }
+    .portrait { max-width: 15rem; order: -1; }
     section { grid-template-columns: 1fr; gap: 1.25rem; padding: 2.75rem 0; }
   }
 </style>
@@ -149,16 +213,19 @@
 <main>
   <header class="hero">
     <div>
-      <h1 class="name">Andrés Ortega</h1>
-      <p class="headline">I build real-time products and the systems that keep them running.</p>
-      <p class="intro">Senior backend and platform engineer with 9 years across fintech, e-health and startups. Founder of EDHPlay, a multiplayer Magic: The Gathering platform with 175,000+ players.</p>
-      <nav class="links" aria-label="Contact">
+      <div class="name-row fade">
+        <h1 class="name">Andrés Ortega</h1>
+        <span class="status">Available for new projects</span>
+      </div>
+      <p class="headline split" style="--d: 150ms">I build real-time products and the systems that keep them running.</p>
+      <p class="intro fade" style="--d: 650ms">Senior backend and platform engineer with 9 years across fintech, e-health and startups. Founder of EDHPlay, a multiplayer Magic: The Gathering platform with 175,000+ players.</p>
+      <nav class="links fade" style="--d: 800ms" aria-label="Contact">
         <a href="mailto:0010aor@gmail.com?subject=Project%20inquiry">Email</a>
         <a href="https://www.linkedin.com/in/0010aor/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/0010aor" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
-    <img src="andres.webp" width="800" height="1001" alt="Portrait of Andrés Ortega" fetchpriority="high">
+    <div class="portrait"><img src="andres.webp" width="800" height="1001" alt="Portrait of Andrés Ortega" fetchpriority="high"></div>
   </header>
 
   <section aria-labelledby="work">
@@ -166,7 +233,7 @@
     <ul class="list">
       <li>
         <a href="https://edhplay.com" target="_blank" rel="noopener"><b>EDHPlay</b></a>
-        <span class="meta">175K+ players</span>
+        <span class="meta" data-count="175" data-suffix="K+ players">175K+ players</span>
         <p>Play Commander online with friends or strangers. I built the real-time game engine on FastAPI and WebSockets, the deck builder and the infrastructure. 65K monthly players, 20K on Discord.</p>
       </li>
       <li>
@@ -207,7 +274,7 @@
   <section class="contact" aria-labelledby="contact">
     <h2 id="contact">Contact</h2>
     <div>
-      <p>Have a project in mind? I'd like to hear about it.</p>
+      <p class="split" style="--d: 200ms">Have a project in mind? I'd like to hear about it.</p>
       <nav class="links" aria-label="Contact">
         <a href="mailto:0010aor@gmail.com?subject=Project%20inquiry">0010aor@gmail.com</a>
         <a href="https://www.linkedin.com/in/0010aor/" target="_blank" rel="noopener">LinkedIn</a>
@@ -217,5 +284,120 @@
   </section>
 </main>
 <footer>San Francisco. Open to freelance projects and full-time roles.</footer>
+<script>
+(() => {
+  const root = document.documentElement
+  const motion = root.classList.contains('motion')
+
+  const splitWords = (el) => {
+    const words = el.textContent.trim().split(/\s+/)
+    const label = document.createElement('span')
+    label.className = 'sr-only'
+    label.textContent = el.textContent.trim()
+    el.textContent = ''
+    el.append(label)
+    words.forEach((word, i) => {
+      const outer = document.createElement('span')
+      outer.className = 'w'
+      outer.setAttribute('aria-hidden', 'true')
+      const inner = document.createElement('span')
+      inner.textContent = word
+      outer.style.setProperty('--i', i)
+      inner.style.setProperty('--i', i)
+      outer.append(inner)
+      el.append(outer, i < words.length - 1 ? ' ' : '')
+    })
+  }
+
+  const resetCounters = () => {
+    document.querySelectorAll('[data-count]').forEach((el) => { el.textContent = `0${el.dataset.suffix}` })
+  }
+
+  const indexChildren = () => {
+    document.querySelectorAll('section').forEach((section) => {
+      section.querySelectorAll('.list li, .offer li').forEach((li, i) => {
+        li.style.setProperty('--i', i)
+        li.querySelectorAll(':scope > *').forEach((child) => child.style.setProperty('--i', i))
+      })
+    })
+  }
+
+  const countUp = (el) => {
+    const target = Number(el.dataset.count)
+    const suffix = el.dataset.suffix
+    const start = performance.now()
+    const duration = 1800
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration)
+      const eased = 1 - Math.pow(1 - t, 4)
+      el.textContent = Math.round(target * eased) + suffix
+      if (t < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }
+
+  const revealHero = () => {
+    document.querySelectorAll('.hero .fade, .hero .split, .portrait').forEach((el) => el.classList.add('in'))
+  }
+
+  const revealOnScroll = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        const el = entry.target
+        el.classList.add('in')
+        el.querySelectorAll('.split').forEach((s) => s.classList.add('in'))
+        el.querySelectorAll('[data-count]').forEach((c) => setTimeout(() => countUp(c), 300))
+        observer.unobserve(el)
+      })
+    }, { rootMargin: '0px 0px -12% 0px' })
+    document.querySelectorAll('main section').forEach((section) => observer.observe(section))
+  }
+
+  const tiltPortrait = () => {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    const portrait = document.querySelector('.portrait')
+    let target = { x: 0, y: 0 }
+    let current = { x: 0, y: 0 }
+    let frame = null
+    const step = () => {
+      current.x += (target.x - current.x) * 0.12
+      current.y += (target.y - current.y) * 0.12
+      portrait.style.setProperty('--rx', `${(-current.y * 7).toFixed(2)}deg`)
+      portrait.style.setProperty('--ry', `${(current.x * 7).toFixed(2)}deg`)
+      const settled = Math.abs(target.x - current.x) < 0.001 && Math.abs(target.y - current.y) < 0.001
+      frame = settled ? null : requestAnimationFrame(step)
+    }
+    const kick = () => { if (!frame) frame = requestAnimationFrame(step) }
+    portrait.addEventListener('pointermove', (e) => {
+      const rect = portrait.getBoundingClientRect()
+      const px = (e.clientX - rect.left) / rect.width
+      const py = (e.clientY - rect.top) / rect.height
+      target = { x: px - 0.5, y: py - 0.5 }
+      portrait.style.setProperty('--mx', `${px * 100}%`)
+      portrait.style.setProperty('--my', `${py * 100}%`)
+      kick()
+    })
+    portrait.addEventListener('pointerleave', () => { target = { x: 0, y: 0 }; kick() })
+  }
+
+  document.querySelectorAll('.split').forEach(splitWords)
+  if (!motion) return
+  indexChildren()
+  resetCounters()
+  tiltPortrait()
+
+  const img = document.querySelector('.portrait img')
+  const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve()
+  const imageReady = img.decode ? img.decode().catch(() => {}) : Promise.resolve()
+  const timeout = new Promise((resolve) => setTimeout(resolve, 900))
+  Promise.race([Promise.all([fontsReady, imageReady]), timeout]).then(() => {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      revealHero()
+      revealOnScroll()
+    }))
+  })
+})()
+</script>
 </body>
 </html>
