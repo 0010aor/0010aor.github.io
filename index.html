@@ -3,35 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Andrés Ortega, backend and platform engineer</title>
+<title>Andrés Ortega</title>
 <meta name="description" content="Senior backend and platform engineer. Founder of EDHPlay, a real-time multiplayer platform with 150K+ players. Available for freelance projects and full-time roles.">
 <meta property="og:title" content="Andrés Ortega, backend and platform engineer">
 <meta property="og:description" content="I build real-time products and the systems that keep them running.">
-<meta property="og:image" content="https://0010aor.github.io/andres.jpg">
-<link rel="icon" href="andres.jpg">
+<meta property="og:image" content="https://0010aor.github.io/andres.webp">
+<link rel="icon" href="favicon.png">
+<link rel="preload" as="image" href="andres.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #eef1f5;
-    --ink: #121a2e;
-    --muted: #5d667a;
-    --rule: #d3d9e2;
-    --own: #2443e0;
-    --employed: #9aa4b6;
-    --focus: #2443e0;
-    --axis: 115;
+    --bg: #f7f8fa;
+    --ink: #16181d;
+    --muted: #6a7080;
+    --rule: #e3e6eb;
+    --accent: #2f4e8c;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #0f1628;
-      --ink: #e6eaf2;
-      --muted: #97a0b3;
-      --rule: #263049;
-      --own: #7c93ff;
-      --employed: #4a5570;
-      --focus: #7c93ff;
+      --bg: #101216;
+      --ink: #eceef2;
+      --muted: #8e95a3;
+      --rule: #23262d;
+      --accent: #8fa9e0;
     }
   }
 
@@ -39,260 +35,155 @@
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    background: var(--paper);
+    background: var(--bg);
     color: var(--ink);
-    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
-    font-size: 1.0625rem;
-    line-height: 1.55;
-    font-optical-sizing: auto;
+    font: 400 1rem/1.65 'Geist', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: inherit; }
-  a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-  .page { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem; }
+  main { max-width: 60rem; margin: 0 auto; padding: 0 1.5rem; }
 
-  header.top {
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    padding: 1.5rem 0;
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 21rem;
+    gap: 4rem;
+    align-items: center;
+    min-height: min(88vh, 48rem);
+    padding: 4rem 0;
   }
-  .who { display: flex; align-items: center; gap: .75rem; text-decoration: none; font-weight: 600; }
-  .who img { width: 2.25rem; height: 2.25rem; border-radius: 50%; }
-  .top nav { display: flex; gap: 1.25rem; font-size: .9375rem; }
-  .top nav a { text-decoration: none; color: var(--muted); }
-  .top nav a:hover { color: var(--ink); }
-
-  .hero { padding: 4.5rem 0 4rem; }
+  .hero .name { margin: 0 0 1.5rem; color: var(--muted); }
   .hero h1 {
     margin: 0;
-    font-size: clamp(2.5rem, 7vw, 5.25rem);
-    line-height: 1;
-    font-weight: 700;
-    font-stretch: 78%;
-    letter-spacing: -.02em;
-    max-width: 14ch;
+    font-size: clamp(2rem, 4.4vw, 3.25rem);
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -.03em;
+    max-width: 16ch;
   }
-  .hero p { max-width: 38rem; margin: 2rem 0 0; font-size: 1.1875rem; color: var(--muted); }
-  .hero p strong { color: var(--ink); font-weight: 600; }
-  .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.25rem; }
-  .btn {
-    display: inline-block; padding: .75rem 1.25rem; border-radius: 999px;
-    font-weight: 600; text-decoration: none; border: 1.5px solid var(--ink);
+  .hero .intro { margin: 1.75rem 0 0; max-width: 32rem; color: var(--muted); font-size: 1.0625rem; }
+  .hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: rise .9s cubic-bezier(.2, .7, .2, 1) both;
   }
-  .btn.primary { background: var(--ink); color: var(--paper); }
-  .btn:hover { background: var(--own); border-color: var(--own); color: #fff; }
-
-  section { padding: 3.5rem 0; border-top: 1px solid var(--rule); }
-  h2 {
-    margin: 0 0 2rem; font-size: 1.75rem; line-height: 1.2;
-    font-weight: 650; font-stretch: 85%;
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero img { animation: none; }
   }
 
-  .timeline { position: relative; }
-  .legend { display: flex; gap: 1.5rem; margin: -1rem 0 1.75rem; font-size: .875rem; color: var(--muted); }
-  .legend span::before {
-    content: ''; display: inline-block; width: .75rem; height: .75rem; border-radius: 2px;
-    margin-right: .45rem; vertical-align: -1px; background: var(--c);
-  }
-  .row {
-    display: grid; grid-template-columns: 15rem 1fr; gap: 1.5rem; align-items: center;
-    padding: .7rem 0;
-  }
-  .row .label { line-height: 1.3; }
-  .row .label b { font-weight: 600; display: block; }
-  .row .label small { color: var(--muted); font-size: .875rem; }
-  .track { position: relative; height: .875rem; }
-  .track::before {
-    content: ''; position: absolute; inset: 50% 0 auto; height: 1px; background: var(--rule);
-  }
-  .bar {
-    position: absolute; top: 0; bottom: 0; border-radius: 3px;
-    left: calc(var(--s) / var(--axis) * 100%);
-    width: max(4px, calc((var(--e) - var(--s)) / var(--axis) * 100%));
-    background: var(--employed);
-  }
-  .bar.own { background: var(--own); }
-  .bar.ongoing { border-top-right-radius: 0; border-bottom-right-radius: 0; }
-  .axis {
-    display: grid; grid-template-columns: 15rem 1fr; gap: 1.5rem; margin-top: .5rem;
-    font-size: .8125rem; color: var(--muted); font-variant-numeric: tabular-nums;
-  }
-  .axis .ticks { position: relative; height: 1.25rem; }
-  .axis .ticks span { position: absolute; left: calc(var(--m) / var(--axis) * 100%); transform: translateX(-50%); }
+  .links { display: flex; flex-wrap: wrap; gap: 1.75rem; margin-top: 2.25rem; }
+  .links a { font-weight: 500; border-bottom: 1px solid var(--rule); padding-bottom: 2px; transition: border-color .2s, color .2s; }
+  .links a:hover { color: var(--accent); border-color: var(--accent); }
 
-  .work { display: grid; gap: 2.5rem; }
-  .project { display: grid; grid-template-columns: 15rem 1fr; gap: 1.5rem; }
-  .project h3 { margin: 0; font-size: 1.375rem; font-weight: 650; font-stretch: 85%; line-height: 1.2; }
-  .project h3 + p { margin: .25rem 0 0; font-size: .875rem; color: var(--muted); }
-  .project .body p { margin: 0 0 .75rem; max-width: 38rem; }
-  .facts { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin: 1rem 0 0; padding: 0; list-style: none; }
-  .facts li { font-size: .9375rem; color: var(--muted); }
-  .facts b { display: block; font-size: 1.375rem; color: var(--ink); font-weight: 650; font-stretch: 85%; }
-  .links { font-size: .9375rem; }
-  .links a { margin-right: 1.25rem; text-underline-offset: 3px; }
+  section {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 2rem;
+    padding: 3.5rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  h2 { margin: 0; font-size: .9375rem; font-weight: 500; color: var(--muted); }
 
-  .help { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 3rem; margin: 0; padding: 0; list-style: none; }
-  .help h3 { margin: 0 0 .35rem; font-size: 1.125rem; font-weight: 650; }
-  .help p { margin: 0; color: var(--muted); max-width: 30rem; }
+  ol, ul { list-style: none; margin: 0; padding: 0; }
+  .list li { display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; padding: .9rem 0; }
+  .list li + li { border-top: 1px solid var(--rule); }
+  .list li:first-child { padding-top: 0; }
+  .list b { font-weight: 500; }
+  .list p { grid-column: 1 / -1; margin: 0; color: var(--muted); max-width: 34rem; }
+  .list time, .list .meta { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .list a b { transition: color .2s; }
+  .list a:hover b { color: var(--accent); }
 
-  .stack { max-width: 44rem; margin: 0; color: var(--muted); }
-  .stack b { color: var(--ink); font-weight: 600; }
+  .offer li { display: flex; gap: .75rem; padding: .35rem 0; }
+  .offer li::before { content: ''; flex: none; width: .9rem; height: 1px; margin-top: .8em; background: var(--muted); }
 
-  .contact h2 { font-size: clamp(2rem, 5vw, 3.25rem); font-stretch: 78%; line-height: 1.05; max-width: 18ch; }
-  .contact p { color: var(--muted); max-width: 36rem; margin: 0; }
-  footer { padding: 2rem 0 3rem; font-size: .875rem; color: var(--muted); }
+  .contact p { margin: 0; font-size: clamp(1.375rem, 3vw, 1.75rem); line-height: 1.3; letter-spacing: -.02em; font-weight: 500; max-width: 22ch; }
+  .contact .links { margin-top: 1.5rem; }
+
+  footer { max-width: 60rem; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; color: var(--muted); font-size: .875rem; border-top: 1px solid var(--rule); }
 
   @media (max-width: 760px) {
-    .top nav { display: none; }
-    .hero { padding: 2.5rem 0 3rem; }
-    .row, .axis, .project { grid-template-columns: 1fr; gap: .5rem; }
-    .axis .label-spacer { display: none; }
-    .axis .ticks span:nth-child(even) { display: none; }
-    .help { grid-template-columns: 1fr; }
+    .hero { grid-template-columns: 1fr; gap: 2.5rem; min-height: 0; padding: 2.5rem 0 3.5rem; }
+    .hero img { max-width: 15rem; order: -1; }
+    section { grid-template-columns: 1fr; gap: 1.25rem; padding: 2.75rem 0; }
   }
 </style>
 </head>
 <body>
-<div class="page">
-  <header class="top">
-    <a class="who" href="#"><img src="andres.jpg" alt="">Andrés Ortega</a>
-    <nav aria-label="Sections">
-      <a href="#work">Work</a>
-      <a href="#help">What I do</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<main>
+  <header class="hero">
+    <div>
+      <p class="name">Andrés Ortega</p>
+      <h1>I build real-time products and the systems that keep them running.</h1>
+      <p class="intro">Senior backend and platform engineer with 9 years across fintech, e-health and startups. Founder of EDHPlay, a multiplayer Magic: The Gathering platform with 150,000+ players.</p>
+      <nav class="links" aria-label="Contact">
+        <a href="mailto:0010aor@gmail.com?subject=Project%20inquiry">Email</a>
+        <a href="https://www.linkedin.com/in/0010aor/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/0010aor" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <img src="andres.webp" width="800" height="1001" alt="Andrés Ortega">
   </header>
 
-  <main>
-    <div class="hero">
-      <h1>I build real-time products and the systems that keep them running.</h1>
-      <p>I'm Andrés, a senior backend and platform engineer with 9 years across fintech, e-health and startups. I built <strong>EDHPlay</strong>, a multiplayer Magic: The Gathering platform with <strong>150,000+ players</strong>.</p>
-      <div class="actions">
-        <a class="btn primary" href="mailto:0010aor@gmail.com?subject=Project%20inquiry">Email me</a>
-        <a class="btn" href="https://www.linkedin.com/in/0010aor/" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
+  <section aria-labelledby="work">
+    <h2 id="work">Work</h2>
+    <ul class="list">
+      <li>
+        <a href="https://edhplay.com" target="_blank" rel="noopener"><b>EDHPlay</b></a>
+        <span class="meta">150K+ players</span>
+        <p>Play Commander online with friends or strangers. I built the real-time game engine on FastAPI and WebSockets, the deck builder and the infrastructure. 65K monthly players, 20K on Discord.</p>
+      </li>
+      <li>
+        <b>Taste-This</b>
+        <span class="meta">10K users in 48h</span>
+        <p>Restaurant discovery that ranks dishes, not restaurants, using LLMs to read what reviews say about each plate.</p>
+      </li>
+      <li>
+        <a href="https://flash-notes.com" target="_blank" rel="noopener"><b>FlashNotes</b></a>
+        <span class="meta">Open source</span>
+        <p>A flashcard platform for learning.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
+    <ol class="list">
+      <li><b>EDHPlay, founder and lead engineer</b><time>2025 – now</time></li>
+      <li><b>Business Radar, software engineer</b><time>2025</time></li>
+      <li><b>Independent developer</b><time>2024 – now</time></li>
+      <li><b>Therapieland, backend developer</b><time>2019 – 2024</time></li>
+      <li><b>BBVA, backend developer</b><time>2018 – 2019</time></li>
+      <li><b>Redsys, backend developer</b><time>2017 – 2018</time></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="help">
+    <h2 id="help">How I can help</h2>
+    <ul class="offer">
+      <li>Take an idea to a launched product</li>
+      <li>Build multiplayer and real-time features</li>
+      <li>Speed up and stabilise an existing backend</li>
+      <li>Add LLM features without runaway API costs</li>
+    </ul>
+  </section>
+
+  <section class="contact" aria-labelledby="contact">
+    <h2 id="contact">Contact</h2>
+    <div>
+      <p>Have a project in mind? I'd like to hear about it.</p>
+      <nav class="links" aria-label="Contact">
+        <a href="mailto:0010aor@gmail.com?subject=Project%20inquiry">0010aor@gmail.com</a>
+        <a href="https://www.linkedin.com/in/0010aor/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
     </div>
-
-    <section aria-labelledby="career">
-      <h2 id="career">Where I've worked</h2>
-      <div class="legend">
-        <span style="--c: var(--own)">My own products</span>
-        <span style="--c: var(--employed)">Employed</span>
-      </div>
-      <div class="timeline">
-        <div class="row">
-          <div class="label"><b>EDHPlay</b><small>Founder and lead engineer, 2025 to now</small></div>
-          <div class="track"><div class="bar own ongoing" style="--s:97;--e:112"></div></div>
-        </div>
-        <div class="row">
-          <div class="label"><b>Business Radar</b><small>Software engineer, Amsterdam, 2025</small></div>
-          <div class="track"><div class="bar" style="--s:97;--e:101"></div></div>
-        </div>
-        <div class="row">
-          <div class="label"><b>Independent</b><small>Products and freelance, 2024 to now</small></div>
-          <div class="track"><div class="bar own ongoing" style="--s:85;--e:112"></div></div>
-        </div>
-        <div class="row">
-          <div class="label"><b>Therapieland</b><small>Backend developer, Netherlands, 2019 to 2024</small></div>
-          <div class="track"><div class="bar" style="--s:27;--e:84"></div></div>
-        </div>
-        <div class="row">
-          <div class="label"><b>BBVA</b><small>Backend and fullstack, Spain, 2018 to 2019</small></div>
-          <div class="track"><div class="bar" style="--s:14;--e:26"></div></div>
-        </div>
-        <div class="row">
-          <div class="label"><b>Redsys</b><small>Backend and fullstack, Spain, 2017 to 2018</small></div>
-          <div class="track"><div class="bar" style="--s:0;--e:14"></div></div>
-        </div>
-        <div class="axis" aria-hidden="true">
-          <div class="label-spacer"></div>
-          <div class="ticks">
-            <span style="--m:8">2018</span><span style="--m:20">2019</span><span style="--m:32">2020</span>
-            <span style="--m:44">2021</span><span style="--m:56">2022</span><span style="--m:68">2023</span>
-            <span style="--m:80">2024</span><span style="--m:92">2025</span><span style="--m:104">2026</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="work" aria-labelledby="work-title">
-      <h2 id="work-title">Things I've built</h2>
-      <div class="work">
-        <article class="project">
-          <div>
-            <h3>EDHPlay</h3>
-            <p>Founder, 2025 to now</p>
-          </div>
-          <div class="body">
-            <p>A browser platform for playing Commander, the most popular Magic: The Gathering format, with friends or strangers. I designed the real-time game engine on FastAPI and WebSockets, the deck builder, and the infrastructure it runs on. It earns recurring revenue through Patreon.</p>
-            <ul class="facts">
-              <li><b>150K+</b>registered players</li>
-              <li><b>65K</b>monthly active users</li>
-              <li><b>20K+</b>Discord members</li>
-            </ul>
-            <p class="links" style="margin-top:1.25rem"><a href="https://edhplay.com" target="_blank" rel="noopener">edhplay.com</a></p>
-          </div>
-        </article>
-        <article class="project">
-          <div>
-            <h3>Taste-This</h3>
-            <p>Independent, 2024</p>
-          </div>
-          <div class="body">
-            <p>Restaurant discovery that ranks individual dishes, not restaurants. Scraping pipelines collect reviews and an LLM pulls out what people say about each dish. It reached 10,000 users in its first 48 hours.</p>
-          </div>
-        </article>
-        <article class="project">
-          <div>
-            <h3>FlashNotes</h3>
-            <p>Open source</p>
-          </div>
-          <div class="body">
-            <p>An open-source flashcard platform for learning.</p>
-            <p class="links"><a href="https://flash-notes.com" target="_blank" rel="noopener">flash-notes.com</a><a href="https://github.com/0010aor/FlashNotes" target="_blank" rel="noopener">Source on GitHub</a></p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="help" aria-labelledby="help-title">
-      <h2 id="help-title">What I can do for you</h2>
-      <ul class="help">
-        <li>
-          <h3>Take your idea to a launched product</h3>
-          <p>Backend, frontend and deployment, built by one person who has done it before. FastAPI or Django with React.</p>
-        </li>
-        <li>
-          <h3>Build real-time features</h3>
-          <p>Multiplayer, live collaboration and anything that needs WebSockets to hold up with thousands of people connected.</p>
-        </li>
-        <li>
-          <h3>Fix a backend that is slowing you down</h3>
-          <p>Slow Postgres queries, flaky deploys, background jobs that fall over. Docker, Kubernetes and AWS.</p>
-        </li>
-        <li>
-          <h3>Put AI to work in your product</h3>
-          <p>LLM pipelines that extract and rank data, and routing across models to keep API costs down.</p>
-        </li>
-      </ul>
-    </section>
-
-    <section aria-labelledby="stack-title">
-      <h2 id="stack-title">Tools I use</h2>
-      <p class="stack"><b>Python</b> with FastAPI and Django, <b>TypeScript</b> with React and Next.js, <b>PostgreSQL</b> and Redis, <b>AWS</b>, GCP, Docker, Kubernetes and Terraform, Celery for background work, Pytest, Cypress and Locust for testing.</p>
-    </section>
-
-    <section id="contact" class="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Have a project in mind? Tell me about it.</h2>
-      <p>I'm based in San Francisco and open to freelance projects and full-time roles.</p>
-      <div class="actions">
-        <a class="btn primary" href="mailto:0010aor@gmail.com?subject=Project%20inquiry">Email me</a>
-        <a class="btn" href="https://www.linkedin.com/in/0010aor/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://github.com/0010aor" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>Andrés Ortega Rodríguez</footer>
-</div>
+  </section>
+</main>
+<footer>San Francisco. Open to freelance projects and full-time roles.</footer>
 </body>
 </html>
