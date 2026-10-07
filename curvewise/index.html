@@ -39,7 +39,7 @@
     <script>
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion')
     </script>
-    <script type="module" crossorigin src="./assets/main-DEZq8a0p.js"></script>
+    <script type="module" crossorigin src="./assets/main-DOTXnqzJ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/motion-CpNFR_lh.js">
     <link rel="stylesheet" crossorigin href="./assets/main-BuIXQfgX.css">
   </head>
@@ -142,9 +142,9 @@
           <legend>Image type</legend>
           <div class="tiles" id="imageType">
             <label class="tile">
-              <input type="radio" name="imageType" value="auto" checked aria-describedby="tipAuto" />
-              <span>Auto-detect</span>
-              <span class="tip" id="tipAuto">Let Curvewise choose. Works for most images.</span>
+              <input type="radio" name="imageType" value="photo" checked aria-describedby="tipPhoto" />
+              <span>Photo</span>
+              <span class="tip" id="tipPhoto">Photographs and gradients. The result is a poster-like set of colour patches.</span>
             </label>
             <label class="tile">
               <input type="radio" name="imageType" value="logo_aa" aria-describedby="tipLogo" />
@@ -156,13 +156,7 @@
               <span>Pixel art</span>
               <span class="tip" id="tipPixel">Hard, jagged pixel edges with no blending: pixel art, simple screenshots, 1-bit scans.</span>
             </label>
-            <label class="tile">
-              <input type="radio" name="imageType" value="photo" aria-describedby="tipPhoto" />
-              <span>Photo</span>
-              <span class="tip" id="tipPhoto">Photographs and gradients. The result is a poster-like set of colour patches.</span>
-            </label>
           </div>
-          <p class="hint" id="detected" aria-live="polite"></p>
         </fieldset>
 
         <fieldset class="group stagger" style="--i: 1">
