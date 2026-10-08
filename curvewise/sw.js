@@ -1,4 +1,4 @@
-const CACHE = 'curvewise-v1'
+const CACHE = 'curvewise-v2'
 const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com']
 
 self.addEventListener('install', () => self.skipWaiting())
@@ -39,6 +39,6 @@ async function cacheFirst(request) {
 
 self.addEventListener('fetch', (event) => {
   if (!cacheable(event.request)) return
-  const isPage = event.request.mode === 'navigate'
-  event.respondWith(isPage ? networkFirst(event.request) : cacheFirst(event.request))
+  const immutable = new URL(event.request.url).pathname.includes('/assets/')
+  event.respondWith(immutable ? cacheFirst(event.request) : networkFirst(event.request))
 })

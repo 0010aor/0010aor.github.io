@@ -63,9 +63,9 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="./assets/learn-HkQw6uqV.js"></script>
+    <script type="module" crossorigin src="./assets/learn-WmF7d1re.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/motion-CpNFR_lh.js">
-    <link rel="stylesheet" crossorigin href="./assets/learn-Bnc39871.css">
+    <link rel="stylesheet" crossorigin href="./assets/learn-DTBxcijx.css">
   </head>
   <body class="page">
     <header class="page-top">
@@ -85,6 +85,48 @@
           It all happens in your browser, so your image is never uploaded.
         </p>
         <p class="fade" style="--d: 650ms"><a class="button primary large" href="./">Convert an image</a></p>
+      </section>
+
+      <section class="showcase reveal-row" aria-labelledby="showcaseTitle">
+        <div class="showcase-head">
+          <h2 id="showcaseTitle">See it in action</h2>
+          <p>Drag the handle to compare the original pixels with the vector result, or zoom in to see the difference.</p>
+        </div>
+        <div class="gallery">
+          <figure class="example" data-name="logo">
+            <div class="compare" style="--ratio: 1">
+              <div class="zoomable">
+                <img class="before" src="./showcase/logo.png" alt="Original low-resolution PNG of a coffee roaster logo badge" loading="lazy" />
+                <img class="after" src="./showcase/logo.svg" alt="The same logo badge converted to a sharp SVG" loading="lazy" />
+              </div>
+              <input class="slider" type="range" min="0" max="100" value="50" aria-label="Compare original and vector" />
+              <span class="tag left">PNG</span><span class="tag right">SVG</span>
+            </div>
+            <figcaption><b>Logo badge</b><span class="stats"></span><button class="zoom-toggle" type="button" aria-pressed="false">Zoom 4×</button></figcaption>
+          </figure>
+          <figure class="example" data-name="potion">
+            <div class="compare" style="--ratio: 1">
+              <div class="zoomable">
+                <img class="before" src="./showcase/potion.png" alt="Original pixel art potion sprite" loading="lazy" />
+                <img class="after" src="./showcase/potion.svg" alt="The pixel art potion converted to an SVG with crisp pixel edges" loading="lazy" />
+              </div>
+              <input class="slider" type="range" min="0" max="100" value="50" aria-label="Compare original and vector" />
+              <span class="tag left">PNG</span><span class="tag right">SVG</span>
+            </div>
+            <figcaption><b>Pixel art sprite</b><span class="stats"></span><button class="zoom-toggle" type="button" aria-pressed="false">Zoom 4×</button></figcaption>
+          </figure>
+          <figure class="example" data-name="landscape">
+            <div class="compare" style="--ratio: 1">
+              <div class="zoomable">
+                <img class="before" src="./showcase/landscape.png" alt="Original flat landscape illustration as a PNG" loading="lazy" />
+                <img class="after" src="./showcase/landscape.svg" alt="The landscape illustration converted to an SVG" loading="lazy" />
+              </div>
+              <input class="slider" type="range" min="0" max="100" value="50" aria-label="Compare original and vector" />
+              <span class="tag left">PNG</span><span class="tag right">SVG</span>
+            </div>
+            <figcaption><b>Flat illustration</b><span class="stats"></span><button class="zoom-toggle" type="button" aria-pressed="false">Zoom 4×</button></figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="row reveal-row">
@@ -122,6 +164,7 @@
         <h2>Tips for the best result</h2>
         <ul class="points">
           <li><b>Start big and clean</b><span>The largest, least compressed version of an image gives the smoothest curves. Heavy JPEG artefacts turn into lumps.</span></li>
+          <li><b>Pick the image type</b><span>Choose Photo for photographs, Logo or illustration for flat colours with smooth edges, and Pixel art for hard pixel edges.</span></li>
           <li><b>Tune detail</b><span>If small specks appear, lower the detail. If thin parts disappear, raise it.</span></li>
           <li><b>Set the colours</b><span>If you know how many colours a logo has, pick that number. Each option shows its palette before you choose.</span></li>
         </ul>
