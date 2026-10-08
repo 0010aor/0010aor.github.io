@@ -1,0 +1,38 @@
+{
+  "version": "muyv9e6n",
+  "items": [
+    {
+      "name": "logo",
+      "title": "Logo badge",
+      "width": 320,
+      "height": 320,
+      "shapes": 97,
+      "colours": 4,
+      "ms": 1176,
+      "svgBytes": 45775,
+      "png4xBytes": 87465
+    },
+    {
+      "name": "potion",
+      "title": "Pixel art sprite",
+      "width": 320,
+      "height": 320,
+      "shapes": 23,
+      "colours": 7,
+      "ms": 23,
+      "svgBytes": 9785,
+      "png4xBytes": 12769
+    },
+    {
+      "name": "landscape",
+      "title": "Flat illustration",
+      "width": 320,
+      "height": 320,
+      "shapes": 11,
+      "colours": 8,
+      "ms": 436,
+      "svgBytes": 7288,
+      "png4xBytes": 36124
+    }
+  ]
+}
